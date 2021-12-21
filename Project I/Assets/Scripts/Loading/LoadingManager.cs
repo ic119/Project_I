@@ -9,14 +9,14 @@ public class LoadingManager : ServerManager
     #region LifeCycle
     private void Awake()
     {
-        StartCoroutine(JoinCharacter());
+        StartCoroutine(JoinLobby());
     }
     #endregion
 
-    IEnumerator JoinCharacter()
+    IEnumerator JoinLobby()
     {
         yield return new WaitForSeconds(1.0f);
-        AppManager.Instance.ChangeScene(AppManager.eSceneState.Character);
-        Debug.Log("캐릭터 생성으로 이동합니다.");
+        AppManager.Instance.ChangeScene(AppManager.eSceneState.Lobby);
+        Debug.Log("Lobby Scene으로 이동합니다.");
     }
 }

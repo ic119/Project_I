@@ -12,8 +12,8 @@ public class AppManager : Singleton<AppManager>
     {
         App,
         Loading,
-        Character,
         Lobby,
+        Room,
         InGame
     }
 
@@ -45,28 +45,14 @@ public class AppManager : Singleton<AppManager>
                 break;
             case eSceneState.Loading:
                 {
-                    //SceneManager.LoadScene(eSceneState.Loading.ToString());
-                    SceneManager.LoadSceneAsync(eSceneState.Loading.ToString()).completed += (oper) =>
-                    {
-                        ChangeScene(eSceneState.Character);
-                    };
+                    SceneManager.LoadScene(eSceneState.Loading.ToString());
                     
-                    /*
                     if (PhotonNetwork.IsConnected)
                     {
                         SceneManager.LoadSceneAsync(eSceneState.Loading.ToString()).completed += (oper) =>
                         {
-                            ChangeScene(eSceneState.Character);
+                            ChangeScene(eSceneState.Lobby);
                         };
-                    }
-                    */
-                }
-                break;
-            case eSceneState.Character:
-                {
-                    if (PhotonNetwork.IsConnected)
-                    {
-                        PhotonNetwork.LoadLevel(eSceneState.Character.ToString());
                     }
                 }
                 break;
@@ -82,9 +68,28 @@ public class AppManager : Singleton<AppManager>
                     }
                 }
                 break;
+            case eSceneState.Room:
+                {   
+                    if(PhotonNetwork.IsConnected) 
+                    {
+                        PhotonNetwork.LoadLevel(eSceneState.Room.ToString());
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(eSceneState.Room.ToString());
+                    }
+                }
+                break;
             case eSceneState.InGame:
-                {
-                    PhotonNetwork.LoadLevel(eSceneState.InGame.ToString());
+                {   
+                    if(PhotonNetwork.IsConnected)
+                    {
+                        PhotonNetwork.LoadLevel(eSceneState.InGame.ToString());
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(eSceneState.InGame.ToString());
+                    }
                 }
                 break;
         }
