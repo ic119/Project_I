@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Photon.Realtime;
+using Photon.Pun;
 
 public class RoomListInfo : UIManager
 {
@@ -45,14 +46,25 @@ public class RoomListInfo : UIManager
 
     private void Start()
     {
-        join_BTN.onClick.AddListener(Join);
+        join_BTN.onClick.AddListener(OnClick_JoinBTN);
     }
     #endregion
 
     #region public Method
-    public override void Join()
+    public void OnClick_JoinBTN()
     {
+        lobbyUI.nickName_Container.SetActive(true);
+    }
 
+    /// <summary>
+    /// 방에 대한 정보 세팅처리
+    /// </summary>
+    /// <param name="_roomInfo"></param>
+    public void SetRoomInfo(RoomInfo _roomInfo)
+    {
+        roomInfo = _roomInfo;
+        roomName_TEXT.text = (string)roomInfo.CustomProperties["RoomName"];
+        roomCount_TEXT.text = string.Format(roomInfo.PlayerCount + " / " + roomInfo.MaxPlayers);
     }
     #endregion
 }
