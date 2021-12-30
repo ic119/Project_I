@@ -13,8 +13,7 @@ public class AppManager : Singleton<AppManager>
         App,
         Loading,
         Lobby,
-        Room,
-        InGame
+        Room
     }
 
     public eSceneState sceneState;
@@ -77,18 +76,6 @@ public class AppManager : Singleton<AppManager>
                     else
                     {
                         SceneManager.LoadScene(eSceneState.Room.ToString());
-                    }
-                }
-                break;
-            case eSceneState.InGame:
-                {   
-                    if(PhotonNetwork.IsConnected)
-                    {
-                        PhotonNetwork.LoadLevel(eSceneState.InGame.ToString());
-                    }
-                    else
-                    {
-                        SceneManager.LoadScene(eSceneState.InGame.ToString());
                     }
                 }
                 break;

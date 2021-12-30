@@ -9,5 +9,10 @@ public class UIManager : Singleton<UIManager>
     {
         Application.Quit();
     }
+
+    public virtual void Click_Start()
+    {
+
+    }
     #endregion
 }
